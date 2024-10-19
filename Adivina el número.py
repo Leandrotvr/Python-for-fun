@@ -1,6 +1,5 @@
 import random
 
-# Diccionario con mensajes en formato similar a JSON
 mensajes = {
     'WELCOME': {
         'es': '¡Bienvenido al juego de adivinanza!',
