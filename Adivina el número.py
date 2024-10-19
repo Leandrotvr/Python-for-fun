@@ -6,8 +6,8 @@ mensajes = {
         'en': 'Welcome to the guessing game!'
     },
     'GUESS': {
-        'es': 'Introduce tu adivinanza: ',
-        'en': 'Enter your guess: '
+        'es': 'Introduce tu número: ',
+        'en': 'Enter your number: '
     },
     'BAD_INPUT': {
         'es': 'Por favor, elige un número entre 1 y 100.',
