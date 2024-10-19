@@ -1,54 +1,63 @@
 import random
 
+# Diccionario con mensajes en formato similar a JSON
+mensajes = {
+    'WELCOME': {
+        'es': '¡Bienvenido al juego de adivinanza!',
+        'en': 'Welcome to the guessing game!'
+    },
+    'GUESS': {
+        'es': 'Introduce tu adivinanza: ',
+        'en': 'Enter your guess: '
+    },
+    'BAD_INPUT': {
+        'es': 'Por favor, elige un número entre 1 y 100.',
+        'en': 'Please choose a number between 1 and 100.'
+    },
+    'TOO_LOW': {
+        'es': 'Demasiado bajo. Intenta de nuevo.',
+        'en': 'Too low. Try again.'
+    },
+    'TOO_HIGH': {
+        'es': 'Demasiado alto. Intenta de nuevo.',
+        'en': 'Too high. Try again.'
+    },
+    'CONGRATULATIONS': {
+        'es': '¡Felicidades! Adivinaste el número {0} en {1} intentos.',
+        'en': 'Congratulations! You guessed the number {0} in {1} tries.'
+    },
+    'INVALID_INPUT': {
+        'es': 'Por favor, introduce un número válido.',
+        'en': 'Please enter a valid number.'
+    }
+}
+
 def adivina_el_numero(idioma):
     numero_secreto = random.randint(1, 100)
     intentos = 0
-    
-    if idioma == 'es':
-        print("¡Bienvenido al juego de adivinanza!")
-        print("Estoy pensando en un número entre 1 y 100.")
-    else:
-        print("Welcome to the guessing game!")
-        print("I'm thinking of a number between 1 and 100.")
+
+    print(mensajes['WELCOME'][idioma])
+    print(mensajes['GUESS'][idioma])
 
     while True:
         try:
-            if idioma == 'es':
-                adivinanza = int(input("Introduce tu adivinanza: "))
-            else:
-                adivinanza = int(input("Enter your guess: "))
-                
+            adivinanza = int(input(mensajes['GUESS'][idioma]))
             intentos += 1
-            
+
             if adivinanza < 1 or adivinanza > 100:
-                if idioma == 'es':
-                    print("Por favor, elige un número entre 1 y 100.")
-                else:
-                    print("Please choose a number between 1 and 100.")
+                print(mensajes['BAD_INPUT'][idioma])
                 continue
 
             if adivinanza < numero_secreto:
-                if idioma == 'es':
-                    print("Demasiado bajo. Intenta de nuevo.")
-                else:
-                    print("Too low. Try again.")
+                print(mensajes['TOO_LOW'][idioma])
             elif adivinanza > numero_secreto:
-                if idioma == 'es':
-                    print("Demasiado alto. Intenta de nuevo.")
-                else:
-                    print("Too high. Try again.")
+                print(mensajes['TOO_HIGH'][idioma])
             else:
-                if idioma == 'es':
-                    print(f"¡Felicidades! Adivinaste el número {numero_secreto} en {intentos} intentos.")
-                else:
-                    print(f"Congratulations! You guessed the number {numero_secreto} in {intentos} tries.")
+                print(mensajes['CONGRATULATIONS'][idioma].format(numero_secreto, intentos))
                 break
 
         except ValueError:
-            if idioma == 'es':
-                print("Por favor, introduce un número válido.")
-            else:
-                print("Please enter a valid number.")
+            print(mensajes['INVALID_INPUT'][idioma])
 
 def elegir_idioma():
     while True:
@@ -61,4 +70,3 @@ def elegir_idioma():
 if __name__ == "__main__":
     idioma = elegir_idioma()
     adivina_el_numero(idioma)
-
