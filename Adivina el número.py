@@ -1,5 +1,6 @@
 import random
 
+
 mensajes = {
     'WELCOME': {
         'es': '¡Bienvenido al juego de adivinanza!',
@@ -31,32 +32,37 @@ mensajes = {
     }
 }
 
+def obtener_mensajes_traducidos(idioma):
+    """Devuelve un diccionario de mensajes traducidos al idioma especificado."""
+    return {clave: mensajes[clave][idioma] for clave in mensajes}
+
 def adivina_el_numero(idioma):
+    translatedMessages = obtener_mensajes_traducidos(idioma)
     numero_secreto = random.randint(1, 100)
     intentos = 0
 
-    print(mensajes['WELCOME'][idioma])
-    print(mensajes['GUESS'][idioma])
+    print(translatedMessages['WELCOME'])
+    print(translatedMessages['GUESS'])
 
     while True:
         try:
-            adivinanza = int(input(mensajes['GUESS'][idioma]))
+            adivinanza = int(input(translatedMessages['GUESS']))
             intentos += 1
 
             if adivinanza < 1 or adivinanza > 100:
-                print(mensajes['BAD_INPUT'][idioma])
+                print(translatedMessages['BAD_INPUT'])
                 continue
 
             if adivinanza < numero_secreto:
-                print(mensajes['TOO_LOW'][idioma])
+                print(translatedMessages['TOO_LOW'])
             elif adivinanza > numero_secreto:
-                print(mensajes['TOO_HIGH'][idioma])
+                print(translatedMessages['TOO_HIGH'])
             else:
-                print(mensajes['CONGRATULATIONS'][idioma].format(numero_secreto, intentos))
+                print(translatedMessages['CONGRATULATIONS'].format(numero_secreto, intentos))
                 break
 
         except ValueError:
-            print(mensajes['INVALID_INPUT'][idioma])
+            print(translatedMessages['INVALID_INPUT'])
 
 def elegir_idioma():
     while True:
